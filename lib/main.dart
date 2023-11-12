@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:fresh_store_ui/routes.dart';
 import 'package:fresh_store_ui/screens/tabbar/tabbar.dart';
 import 'package:fresh_store_ui/theme.dart';
+import 'package:fresh_store_ui/login/login_page.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: 'assets/env/.env');
+
   runApp(const FreshBuyerApp());
 }
 
@@ -18,7 +22,7 @@ class FreshBuyerApp extends StatelessWidget {
       title: 'Fresh-Buyer',
       theme: appTheme(),
       routes: routes,
-      home: const FRTabbarScreen(),
+      home: const LoginPage(),
     );
   }
 }

@@ -8,6 +8,9 @@ import 'package:fresh_store_ui/screens/home/search_field.dart';
 import 'package:fresh_store_ui/screens/home/special_offer.dart';
 import 'package:fresh_store_ui/screens/mostpopular/most_popular_screen.dart';
 import 'package:fresh_store_ui/screens/special_offers/special_offers_screen.dart';
+import 'package:kakaomap_webview/kakaomap_webview.dart';
+
+const String kakaoMapKey = 'acca0bbd31345e24d6644a9cac20b85f';
 
 class HomeScreen extends StatefulWidget {
   final String title;
@@ -26,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     const padding = EdgeInsets.fromLTRB(24, 24, 24, 0);
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -45,11 +49,31 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
+          // SliverPadding(
+          //   padding: padding,
+          //   sliver: _buildPopulars(),
+          // ),
           SliverPadding(
-            padding: padding,
-            sliver: _buildPopulars(),
+            padding: EdgeInsets.all(20),
+            sliver: SliverToBoxAdapter(
+              child: GestureDetector(
+                onTap: () {
+                  print("SliverPadding 클릭됨!");
+                  // 여기에 원하는 동작을 추가하세요.
+                },
+                child: Container(
+                  height: 200,
+                  color: Colors.blue,
+                  child: Center(
+                    child: Text("클릭 가능한 영역"),
+                  ),
+                ),
+              ),
+            ),
           ),
-          const SliverAppBar(flexibleSpace: SizedBox(height: 24))
+
+          //const SliverAppBar(flexibleSpace: SizedBox(height: 24)),
+
         ],
       ),
     );
@@ -60,26 +84,26 @@ class _HomeScreenState extends State<HomeScreen> {
       children: [
         const SearchField(),
         const SizedBox(height: 24),
-        SpecialOffers(onTapSeeAll: () => _onTapSpecialOffersSeeAll(context)),
+        //SpecialOffers(onTapSeeAll: () => _onTapSpecialOffersSeeAll(context)),
         const SizedBox(height: 24),
-        MostPopularTitle(onTapseeAll: () => _onTapMostPopularSeeAll(context)),
+        //MostPopularTitle(onTapseeAll: () => _onTapMostPopularSeeAll(context)),
         const SizedBox(height: 24),
         const MostPupularCategory(),
       ],
     );
   }
 
-  Widget _buildPopulars() {
-    return SliverGrid(
-      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 185,
-        mainAxisSpacing: 24,
-        crossAxisSpacing: 16,
-        mainAxisExtent: 285,
-      ),
-      delegate: SliverChildBuilderDelegate(_buildPopularItem, childCount: 30),
-    );
-  }
+  // Widget _buildPopulars() {
+  //   return SliverGrid(
+  //     gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+  //       maxCrossAxisExtent: 185,
+  //       mainAxisSpacing: 24,
+  //       crossAxisSpacing: 16,
+  //       mainAxisExtent: 285,
+  //     ),
+  //     delegate: SliverChildBuilderDelegate(_buildPopularItem, childCount: 30),
+  //   );
+  // }
 
   Widget _buildPopularItem(BuildContext context, int index) {
     final data = datas[index % datas.length];

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fresh_store_ui/screens/profile/header.dart';
+import 'package:fresh_store_ui/login/login_page.dart';
 
 typedef ProfileOptionTap = void Function();
 
@@ -55,6 +56,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
           title: 'Logout',
           icon: _profileIcon('logout@2x.png'),
           titleColor: const Color(0xFFF75555),
+          onClick:() {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginPage()),
+            );
+          }
         ),
       ];
 
